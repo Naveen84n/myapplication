@@ -23,7 +23,7 @@ namespace myapplication.Controllers
             .ToArray();
         }
 
-        [HttpGet(Name = "greetings")]
+        [HttpGet("greeting", Name = "GetGreeting")]
         public string Greet()
         {
             return "Welcome Naveen!";
