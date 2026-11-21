@@ -36,5 +36,6 @@ steps:
   inputs:
     azureSubscription: 'myappservice'
     appType: webAppLinux
+    Resource group: nav-dev-az-groups
     appName: 'myapplication20261120114738'
     package: '$(Build.ArtifactStagingDirectory)/app.zip'
