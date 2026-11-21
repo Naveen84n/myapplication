@@ -22,5 +22,11 @@ namespace myapplication.Controllers
             })
             .ToArray();
         }
+
+        [HttpGet(Name = "greetings")]
+        public string Greet()
+        {
+            return "Welcome Naveen!";
+        }
     }
 }
