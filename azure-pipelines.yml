@@ -8,22 +8,33 @@ variables:
   buildConfiguration: Release
 
 steps:
-
 - task: UseDotNet@2
   inputs:
-    packageType: 'sdk'
-    version: '10.x'
+    packageType: sdk
+    version: 10.x
 
 - script: dotnet restore
   displayName: Restore
 
-- script: dotnet build --configuration $(buildConfiguration)
+- script: dotnet build --configuration $(buildConfiguration) --no-restore
   displayName: Build
 
-- script: dotnet publish --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)
+- script: dotnet publish --configuration $(buildConfiguration) --no-build --output $(Build.ArtifactStagingDirectory)/publish
   displayName: Publish
 
-- task: PublishBuildArtifacts@1
+- task: ArchiveFiles@2
+  displayName: Create deployment package
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
+    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/publish'
+    includeRootFolder: false
+    archiveType: zip
+    archiveFile: '$(Build.ArtifactStagingDirectory)/app.zip'
+    replaceExistingArchive: true
+
+- task: AzureWebApp@1
+  displayName: Deploy to Azure App Service
+  inputs:
+    azureSubscription: 'github.com_Naveen84n'
+    appType: webAppLinux
+    appName: 'myapplication20261120114738'
+    package: '$(Build.ArtifactStagingDirectory)/app.zip'

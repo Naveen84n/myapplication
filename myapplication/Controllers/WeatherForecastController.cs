@@ -28,5 +28,10 @@ namespace myapplication.Controllers
         {
             return "Welcome Naveen!";
         }
+        [HttpGet("Hello", Name = "SayHello")]
+        public string AnotherGreet()
+        {
+            return "Hello, Naveen!";
+        }
     }
 }
