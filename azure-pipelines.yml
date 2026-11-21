@@ -34,7 +34,7 @@ steps:
 - task: AzureWebApp@1
   displayName: Deploy to Azure App Service
   inputs:
-    azureSubscription: 'github.com_Naveen84n'
+    azureSubscription: 'myappservice'
     appType: webAppLinux
     appName: 'myapplication20261120114738'
     package: '$(Build.ArtifactStagingDirectory)/app.zip'
