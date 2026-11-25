@@ -1,3 +1,3 @@
 <Solution>
   <Project Path="myapplication/myapplication.csproj" />
-</Solution>
+  <Project Path="myapplication.Tests/myapplication.Tests.csproj" />`r`n</Solution>

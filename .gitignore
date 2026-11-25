@@ -1,0 +1,6 @@
+# Visual Studio solution-level files
+.vs/
+
+# Build output
+**/bin/
+**/obj/
