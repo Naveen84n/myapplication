@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using myapplication.Controllers;
 using myapplication.Data;
@@ -19,7 +19,7 @@ public class CountryControllerTests
             new Country { Name = "Australia", Iso2Code = "AU", Iso3Code = "AUS" });
         await dbContext.SaveChangesAsync();
 
-        var controller = new CountryController(dbContext);
+        var controller = new CountryController(dbContext, Microsoft.Extensions.Logging.Abstractions.NullLogger<CountryController>.Instance);
 
         var result = await controller.GetAll(CancellationToken.None);
 
@@ -37,7 +37,7 @@ public class CountryControllerTests
     public async Task GetAll_ReturnsEmptyList_WhenNoCountriesExist()
     {
         await using var dbContext = CreateDbContext();
-        var controller = new CountryController(dbContext);
+        var controller = new CountryController(dbContext, Microsoft.Extensions.Logging.Abstractions.NullLogger<CountryController>.Instance);
 
         var result = await controller.GetAll(CancellationToken.None);
 
@@ -48,6 +48,7 @@ public class CountryControllerTests
         Assert.That(countries, Is.Not.Null);
         Assert.That(countries, Is.Empty);
     }
+
 
     private static ApplicationDbContext CreateDbContext()
     {
